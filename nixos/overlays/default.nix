@@ -1,6 +1,6 @@
 { inputs }:
 let
-  custom = self: super: {
+  custom = _self: super: {
     _1password-gui = super._1password-gui.overrideAttrs (prev: {
       postInstall = (prev.postInstall or "") + ''
         mkdir -p $out/etc/xdg/autostart
@@ -9,6 +9,8 @@ let
           --replace 'Exec=${prev.pname} %U' 'Exec=${prev.pname} --silent %U'
       '';
     });
+
+    anyrun = inputs.anyrun.packages.${super.system}.anyrun-with-all-plugins;
 
     bazecor =
       let
@@ -49,7 +51,6 @@ let
         #   services.udev.packages = [ pkgs.bazecor ];
         # to allow non-root modifications to the keyboards.
         extraInstallCommands = ''
-          mv $out/bin/${pname}-${version} $out/bin/${pname}
           wrapProgram "$out/bin/${pname}" \
             --set ELECTRON_USE_WAYLAND 1 \
             --add-flags "--ozone-platform=wayland --enable-features=UseOzonePlatform --disable-gpu"
@@ -65,8 +66,6 @@ let
         '';
       }).overrideAttrs { buildInputs = [ super.makeWrapper ]; };
 
-    helix = inputs.helix.packages.${super.system}.default;
-
     fprintd = super.fprintd.overrideAttrs (prev: {
       mesonCheckFlags = [
         "--no-suite"
@@ -74,9 +73,16 @@ let
       ];
     });
 
-    vault = inputs.nixpkgs-stable.legacyPackages.${super.system}.vault;
+    grimblast = inputs.hyprcontrib.packages.${super.system}.grimblast;
+    helix = inputs.helix.packages.${super.system}.default;
+    hyprland = inputs.hyprland.packages.${super.system}.default;
+    hyprlock = inputs.hyprlock.packages.${super.system}.default;
+    hyprspace = inputs.hyprspace.packages.${super.system}.default;
+    watershot = inputs.watershot.packages.${super.system}.default;
+    xdg-desktop-portal-hyprland = inputs.hyprland.packages.${super.system}.xdg-desktop-portal-hyprland;
     yazi = inputs.yazi.packages.${super.system}.default;
   };
+  hyprland-plugins = inputs.hyprland-plugins.overlays.default;
   nur = inputs.nur.overlay;
 in
-[ custom nur ]
+[ custom hyprland-plugins nur ]

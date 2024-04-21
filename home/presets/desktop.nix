@@ -6,6 +6,7 @@ templated.preset "desktop" {
     home.stateVersion = osConfig.system.stateVersion;
 
     programs.firefox.enable = true;
+    programs.firefox.package = pkgs.firefox-bin;
     programs.firefox.profiles.default = {
       id = 0;
       name = "default";
