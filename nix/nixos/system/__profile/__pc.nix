@@ -13,10 +13,10 @@
   ];
 
   fonts.packages = with pkgs; [
+    nerd-fonts.monaspace
     noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-emoji
-    (nerdfonts.override { fonts = [ "Monaspace" ]; })
   ];
 
   home-manager.sharedModules = [
@@ -54,7 +54,7 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
-    inputs.nur.overlay
+    inputs.nur.overlays.default
     (final: prev: {
       _1password-gui = prev._1password-gui.overrideAttrs (prev: {
         postInstall = (prev.postInstall or "") + ''
@@ -107,7 +107,7 @@
 
     monospace = {
       name = "MonaspiceNe Nerd Font Mono";
-      package = (pkgs.nerdfonts.override { fonts = [ "Monaspace" ]; });
+      package = pkgs.nerd-fonts.monaspace;
     };
   };
   stylix.image = pkgs.fetchurl {
