@@ -14,7 +14,7 @@
 
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     (nerdfonts.override { fonts = [ "Monaspace" ]; })
   ];
@@ -44,11 +44,9 @@
   nix.settings.auto-optimise-store = true;
   nix.settings.substituters = [
     "https://nix-community.cachix.org"
-    "https://yazi.cachix.org"
   ];
   nix.settings.trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
   ];
   nix.settings.trusted-users = [
     "@wheel"
@@ -76,8 +74,6 @@
 
       helix = inputs.helix.packages.default;
       wallpaper = "${inputs.self}/assets/bg01.svg";
-
-      yazi = inputs.yazi.packages.default;
     })
   ];
 

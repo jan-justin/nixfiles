@@ -17,6 +17,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     nur.url = "github:nix-community/nur";
 
@@ -24,9 +25,6 @@
     std.inputs.nixpkgs.follows = "nixpkgs";
 
     stylix.url = "github:danth/stylix";
-
-    yazi.url = "github:sxyazi/yazi";
-    yazi.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { nixpkgs, self, std, ... }@inputs:

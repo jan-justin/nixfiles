@@ -16,7 +16,6 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 8;
@@ -35,6 +34,9 @@
   hardware.enableAllFirmware = true;
   hardware.enableRedistributableFirmware = true;
   hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-media-driver
+  ];
   hardware.pulseaudio.enable = false;
 
   networking.hostName = name;

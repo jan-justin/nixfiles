@@ -1,4 +1,4 @@
-{ name, super, ... }@_haumeaArgs:
+{ inputs, name, super, ... }@_haumeaArgs:
 { config, pkgs, ... }@_nixosModuleArgs: {
   imports = [
     # Remove some boilerplate
@@ -65,4 +65,5 @@
   };
 
   programs.openvpn3.enable = true;
+  programs.openvpn3.package = inputs.nixpkgs-stable.legacyPackages.openvpn3;
 }
