@@ -12,6 +12,7 @@
   home-manager.users.${name} = {
     imports = [
       super.profile.development
+      super.profile.gaming
     ];
 
     programs.git.extraConfig.user.signingKey =
