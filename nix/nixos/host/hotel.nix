@@ -38,7 +38,6 @@
   hardware.graphics.extraPackages = with pkgs; [
     intel-media-driver
   ];
-  hardware.pulseaudio.enable = false;
 
   networking.hostName = name;
 
