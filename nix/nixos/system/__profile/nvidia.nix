@@ -1,7 +1,6 @@
 { ... }@_haumeaArgs:
 { config, pkgs, ... }@_nixosModuleArgs: {
   boot.kernelParams = [
-    "nvidia-drm.fbdev=1"
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
 

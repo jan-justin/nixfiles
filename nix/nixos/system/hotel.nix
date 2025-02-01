@@ -12,6 +12,5 @@
 
   users = [
     cell.user.justin
-    cell.user.uniform
   ];
 }
