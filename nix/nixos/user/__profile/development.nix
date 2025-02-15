@@ -13,11 +13,13 @@
   programs.git.enable = true;
   programs.git.difftastic.enable = true;
   programs.git.extraConfig = {
-    commit.gpgsign = true;
-    gpg.format = "ssh";
-    gpg.ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
     init.defaultBranch = "main";
     pull.rebase = true;
+  };
+  programs.git.signing = {
+    format = "ssh";
+    signByDefault = true;
+    signer = "${pkgs._1password-gui}/bin/op-ssh-sign";
   };
   programs.git.userEmail = lib.mkDefault "jan.justin.vtonder@gmail.com";
   programs.git.userName = "Jan-Justin van Tonder";
