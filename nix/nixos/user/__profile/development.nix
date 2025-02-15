@@ -57,6 +57,8 @@
   };
   programs.helix.themes = { empty = { }; };
 
+  programs.jujutsu.enable = true;
+
   programs.ssh.enable = true;
   programs.ssh.extraConfig = ''
     Host *
