@@ -31,6 +31,8 @@
 
   programs.home-manager.enable = true;
 
+  stylix.targets.firefox.profileNames = [ "default" ];
+
   xdg.configFile."1Password/ssh/agent.toml".text = ''
     [[ssh-keys]]
     vault = "${config.tag}"
