@@ -17,7 +17,7 @@
     id = 0;
     name = "default";
     isDefault = true;
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
       onepassword-password-manager
       ublock-origin
     ];
