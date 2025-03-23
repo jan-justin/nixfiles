@@ -85,6 +85,7 @@
   security.pam.u2f.settings.cue = true;
 
   services.fstrim.enable = true;
+  services.tailscale.enable = true;
 
   stylix.enable = true;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
