@@ -73,7 +73,6 @@
       });
 
       helix = inputs.helix.packages.default;
-      wallpaper = "${inputs.self}/assets/bg01.svg";
     })
   ];
 
