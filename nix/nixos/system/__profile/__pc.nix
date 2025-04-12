@@ -1,7 +1,6 @@
 { inputs, ... }@_haumeaArgs:
 { lib, pkgs, ... }@_nixosModuleArgs: {
   imports = [
-    inputs.cosmic.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     inputs.stylix.nixosModules.stylix
   ];
@@ -83,8 +82,13 @@
   security.pam.u2f.enable = true;
   security.pam.u2f.control = "sufficient";
   security.pam.u2f.settings.cue = true;
+  security.rtkit.enable = true;
 
   services.fstrim.enable = true;
+  services.pipewire.enable = true;
+  services.pipewire.alsa.enable = true;
+  services.pipewire.alsa.support32Bit = true;
+  services.pipewire.pulse.enable = true;
   services.tailscale.enable = true;
 
   stylix.enable = true;
