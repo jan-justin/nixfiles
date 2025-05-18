@@ -16,6 +16,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
+    nonstd.url = "github:vantonder/nonstd";
+    nonstd.inputs.haumea.follows = "haumea";
+    nonstd.inputs.nixpkgs.follows = "nixpkgs";
+    nonstd.inputs.std.follows = "std";
+
     nur.url = "github:nix-community/nur";
 
     std.url = "github:divnix/std";
@@ -24,17 +29,7 @@
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { nixpkgs, self, std, ... }@inputs:
-    let
-      system.harvest = target: path:
-        nixpkgs.lib.attrsets.mapAttrs
-          (systemName: { host, profiles, users }:
-            nixpkgs.lib.nixosSystem {
-              modules = [ host ] ++ profiles ++ users;
-            }
-          )
-          (std.harvest target path)."x86_64-linux";
-    in
+  outputs = { nixpkgs, nonstd, self, std, ... }@inputs:
     std.growOn
       {
         inherit inputs;
@@ -51,6 +46,6 @@
       }
       {
         devShells = std.harvest self [ "support" "shell" ];
-        nixosConfigurations = system.harvest self [ "nixos" "system" ];
+        nixosConfigurations = nonstd.lib.std.system."x86_64" self [ "nixos" "system" ];
       };
 }
