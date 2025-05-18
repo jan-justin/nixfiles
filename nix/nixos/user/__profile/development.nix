@@ -38,6 +38,7 @@
       color-modes = true;
       completion-trigger-len = 1;
       cursorline = true;
+      end-of-line-diagnostics = "hint";
       line-number = "relative";
       true-color = true;
       undercurl = true;
@@ -47,12 +48,22 @@
       normal = "block";
       select = "underline";
     };
+    editor.file-picker = {
+      hidden = false;
+    };
+    editor.inline-diagnostics = {
+      cursor-line = "hint";
+    };
     editor.lsp = {
       display-inlay-hints = true;
       display-messages = true;
     };
     keys.normal = { X = "extend_line_above"; };
     keys.select = { X = "extend_line_above"; };
+    keys.normal.space."A-d" = {
+      "c" = ":toggle inline-diagnostics-cursor-line hint disable";
+      "e" = ":toggle end-of-line-diagnostics hint disable";
+    };
     theme = "kanagawa";
   };
   programs.helix.themes = { empty = { }; };
