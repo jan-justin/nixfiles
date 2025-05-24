@@ -11,6 +11,7 @@
 
   home-manager.users.${name} = {
     imports = [
+      super.profile.cosmic
       super.profile.development
       super.profile.gaming
     ];

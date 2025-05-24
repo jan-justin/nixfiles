@@ -10,8 +10,16 @@
 
   home-manager.users.${name} = {
     imports = [
+      super.profile.cosmic
       super.profile.development
     ];
+
+    cosmic.ext.launcher.plugin.web = ''
+      (
+          matches: ["formelio/gh"],
+          queries: [(name: "Formelio GitHub Org", query: "github.com/search?q=org:formelio " )]
+      ),
+    '';
 
     home.packages = with pkgs; [
       google-cloud-sdk
