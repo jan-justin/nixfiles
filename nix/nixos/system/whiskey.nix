@@ -6,7 +6,6 @@
     super.profile.development
     super.profile.laptop
     super.profile.wayland
-    super.profile.wazuh
   ];
 
   users = [

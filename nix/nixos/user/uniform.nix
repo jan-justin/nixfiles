@@ -1,5 +1,5 @@
 { inputs, name, super, ... }@_haumeaArgs:
-{ config, pkgs, ... }@_nixosModuleArgs: {
+{ config, lib, pkgs, ... }@_nixosModuleArgs: {
   imports = [
     # Remove some boilerplate
     (super.pc-user {
@@ -76,4 +76,15 @@
 
   programs.openvpn3.enable = true;
   programs.openvpn3.package = inputs.nixpkgs-stable.legacyPackages.openvpn3;
+
+  systemd.targets.multi-user.wants = [ "wazuh.service" ];
+  systemd.services.wazuh = {
+    description = "Sets up wazuh container";
+    after = [ "network.target" "network-online.target" ];
+    wants = [ "network.target" "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "systemd-nspawn --keep-unit --boot -D /var/lib/machines/whiskey";
+    };
+  };
 }
