@@ -26,13 +26,13 @@
       "browser.ml.chat.provider" = lib.mkDefault "http://lima:8080";
       "browser.ml.chat.sidebar" = true;
       "browser.startup.homepage" = lib.mkDefault "about:home";
+      "browser.tabs.closeWindowWithLastTab" = false;
       "browser.toolbars.bookmarks.visibility" = "never";
       "sidebar.animation.enabled" = true;
-      "sidebar.animation.expand-on-hover.duration-ms" = 200;
       "sidebar.position_start" = false;
       "sidebar.revamp" = true;
       "sidebar.verticalTabs" = true;
-      "sidebar.visibility" = "expand-on-hover";
+      "sidebar.visibility" = "always-show";
     };
   };
 
