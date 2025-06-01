@@ -36,6 +36,7 @@
   services.fprintd.enable = true;
   services.fprintd.tod.enable = true;
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+  services.resolved.enable = true;
 
   swapDevices = [ ];
   system.stateVersion = "23.11";

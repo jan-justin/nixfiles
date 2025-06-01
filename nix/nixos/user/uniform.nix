@@ -75,7 +75,6 @@
   };
 
   programs.openvpn3.enable = true;
-  programs.openvpn3.package = inputs.nixpkgs-stable.legacyPackages.openvpn3;
 
   systemd.targets.multi-user.wants = [ "wazuh.service" ];
   systemd.services.wazuh = {
