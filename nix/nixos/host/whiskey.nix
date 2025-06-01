@@ -15,6 +15,8 @@
     "xhci_pci"
   ];
   boot.initrd.kernelModules = [ ];
+  boot.initrd.luks.devices."cryptroot".device =
+    "/dev/disk/by-uuid/514ddd09-40ab-4edd-9d5d-0e93363efdae";
   boot.kernelModules = [ "kvm-intel" ];
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.enable = true;
