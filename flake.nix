@@ -2,6 +2,8 @@
   description = "Nix-based system configuration";
 
   inputs = {
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
     devenv.url = "github:cachix/devenv";
 
     haumea.url = "github:nix-community/haumea";
