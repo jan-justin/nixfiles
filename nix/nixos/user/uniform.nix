@@ -76,7 +76,27 @@
 
   programs.openvpn3.enable = true;
 
-  systemd.targets.multi-user.wants = [ "wazuh.service" ];
+  systemd.services.ovpn = {
+    description = "OpenVPN service";
+    after = [ "dbus.target" "network-online.target" ];
+    wants = [ "dbus.target" "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig =
+      let
+        openvpn3-systemd = "${pkgs.openvpn3}/libexec/openvpn3-linux/openvpn3-systemd";
+      in
+      {
+        Type = "notify";
+        PrivateTmp = true;
+        ProtectSystem = true;
+        ProtectHome = true;
+        Environment = "PYTHONUNBUFFERED=on";
+        ExecStart = "${openvpn3-systemd} --start formelio";
+        ExecReload = "${openvpn3-systemd} --restart formelio";
+        ExecStop = "${openvpn3-systemd} --stop formelio";
+      };
+  };
+
   systemd.services.wazuh = {
     description = "Sets up wazuh container";
     after = [ "network.target" "network-online.target" ];
@@ -86,4 +106,9 @@
       ExecStart = "systemd-nspawn --keep-unit --boot -D /var/lib/machines/whiskey";
     };
   };
+
+  systemd.targets.multi-user.wants = [
+    "ovpn.service"
+    "wazuh.service"
+  ];
 }
