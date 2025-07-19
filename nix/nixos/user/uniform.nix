@@ -111,4 +111,8 @@
     "ovpn.service"
     "wazuh.service"
   ];
+
+  users.users.${name}.extraGroups = [ "docker" ];
+
+  virtualisation.docker.enable = true;
 }
