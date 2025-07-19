@@ -42,6 +42,9 @@
     programs.git.extraConfig.user.signingKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBRTP702lUz73eZnq5TZXdkb2AkNvJbNuHLBXt42kv66";
 
+    programs.jujutsu.settings.signing.key =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBRTP702lUz73eZnq5TZXdkb2AkNvJbNuHLBXt42kv66";
+
     programs.java.enable = true;
     programs.java.package = pkgs.jdk17;
 

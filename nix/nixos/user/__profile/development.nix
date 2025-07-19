@@ -69,6 +69,17 @@
   programs.helix.themes = { empty = { }; };
 
   programs.jujutsu.enable = true;
+  programs.jujutsu.package = pkgs.jujutsu_git;
+  programs.jujutsu.settings.user = {
+    email = lib.mkDefault "jan.justin.vtonder@gmail.com";
+    name = "Jan-Justin van Tonder";
+  };
+  programs.jujutsu.settings.signing = {
+    backend = "ssh";
+    backends.ssh.program = "${pkgs._1password-gui}/bin/op-ssh-sign";
+    behavior = "own";
+  };
+  programs.jujutsu.settings.ui.pager = ":builtin";
 
   programs.ssh.enable = true;
   programs.ssh.extraConfig = ''
