@@ -1,6 +1,7 @@
 { ... }@_haumeaArgs:
 { pkgs, ... }@_nixosModuleArgs: {
   environment.systemPackages = with pkgs; [
+    devenv
     difftastic
     fd
     fzf
