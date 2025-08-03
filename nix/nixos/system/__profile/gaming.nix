@@ -1,6 +1,7 @@
 { inputs, ... }@_haumeaArgs:
 { lib, pkgs, ... }@_nixosModuleArgs: {
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+
   hardware.xpadneo.enable = true;
 
   programs.gamemode.enable = true;
@@ -17,8 +18,10 @@
     "-H 1600"
     "-h 1600"
     "-r 119"
+    "--expose-wayland"
     "--hdr-enabled"
     "--mangoapp"
+    "--rt"
   ];
   programs.steam.gamescopeSession.steamArgs = [
     "-pipewire-dmabuf"
