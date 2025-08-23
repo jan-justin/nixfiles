@@ -1,12 +1,21 @@
 { inputs, ... }@_haumeaArgs:
 { lib, pkgs, ... }@_nixosModuleArgs: {
+  boot.initrd.kernelModules = [ "ntsync" ];
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
+
+  # chaotic.mesa-git.enable = true;
+
+  # environment.systemPackages = [
+  #   pkgs.gamescope-wsi_git
+  #   pkgs.gamescope-wsi32_git
+  # ];
 
   hardware.xpadneo.enable = true;
 
   programs.gamemode.enable = true;
 
   programs.gamescope.enable = true;
+  programs.gamescope.package = pkgs.gamescope_git;
   programs.gamescope.capSysNice = true;
 
   programs.steam.enable = true;
