@@ -25,6 +25,31 @@
   programs.git.userName = "Jan-Justin van Tonder";
 
   programs.helix.enable = true;
+  programs.helix.package = pkgs.helix_git.overrideAttrs (prev:
+    let
+      rectifiedGrammarLinks = lib.attrsets.mapAttrsToList
+        (lang: drv: "ln -s ${drv}/parser $out/lib/runtime/grammars/${lang}.so")
+        prev.passthru.grammars;
+    in
+    {
+      src = pkgs.fetchFromGitHub {
+        owner = "helix-editor";
+        repo = "helix";
+        rev = "282345c4b80716ac3d98baf114b153969738b1da";
+        sha256 = "sha256-mHvZ8eBuOAUt/JFfhJkBG51+qxEmp2dCnmsKwKVAEbk=";
+      };
+
+      postInstall = prev.postInstall + ''
+        # Kanagawa gutter tweak
+        substituteInPlace $out/lib/runtime/themes/kanagawa.toml --replace \
+          '"ui.gutter" = { fg = "sumiInk6", bg = "sumiInk4" }' \
+          '"ui.gutter" = { fg = "sumiInk6", bg = "sumiInk3" }'
+
+        # Grammar fix
+        rm $out/lib/runtime/grammars 
+        mkdir -p $out/lib/runtime/grammars
+      '' + (builtins.concatStringsSep "\n" rectifiedGrammarLinks);
+    });
   programs.helix.defaultEditor = true;
   programs.helix.languages.language = [
     {

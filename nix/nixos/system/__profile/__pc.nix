@@ -71,8 +71,6 @@
           "fprintd:TestPamFprintd"
         ];
       });
-
-      helix = inputs.helix.packages.default;
     })
   ];
 
