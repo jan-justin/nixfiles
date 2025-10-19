@@ -4,7 +4,6 @@
     devenv
     difftastic
     fd
-    fzf
     just
     jq
     poppler

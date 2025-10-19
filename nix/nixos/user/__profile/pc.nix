@@ -42,6 +42,9 @@
     fish_vi_key_bindings
   '';
 
+  programs.fzf.enable = true;
+  programs.fzf.enableFishIntegration = true;
+
   programs.home-manager.enable = true;
 
   stylix.targets.firefox.profileNames = [ "default" ];
