@@ -77,28 +77,7 @@
     };
   };
 
-  programs.openvpn3.enable = true;
-
-  systemd.services.ovpn = {
-    description = "OpenVPN service";
-    after = [ "dbus.target" "network-online.target" ];
-    wants = [ "dbus.target" "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig =
-      let
-        openvpn3-systemd = "${pkgs.openvpn3}/libexec/openvpn3-linux/openvpn3-systemd";
-      in
-      {
-        Type = "notify";
-        PrivateTmp = true;
-        ProtectSystem = true;
-        ProtectHome = true;
-        Environment = "PYTHONUNBUFFERED=on";
-        ExecStart = "${openvpn3-systemd} --start formelio";
-        ExecReload = "${openvpn3-systemd} --restart formelio";
-        ExecStop = "${openvpn3-systemd} --stop formelio";
-      };
-  };
+  services.netbird.enable = true;
 
   systemd.services.wazuh = {
     description = "Sets up wazuh container";
