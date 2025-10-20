@@ -3,13 +3,6 @@
   boot.initrd.kernelModules = [ "ntsync" ];
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_cachyos;
 
-  # chaotic.mesa-git.enable = true;
-
-  # environment.systemPackages = [
-  #   pkgs.gamescope-wsi_git
-  #   pkgs.gamescope-wsi32_git
-  # ];
-
   hardware.xpadneo.enable = true;
 
   programs.gamemode.enable = true;
