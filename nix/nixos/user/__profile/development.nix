@@ -2,6 +2,9 @@
 { config, lib, pkgs, ... }@_hmModuleArgs: {
   programs.bat.enable = true;
 
+  programs.difftastic.enable = true;
+  programs.difftastic.git.enable = true;
+
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
   programs.direnv.config.hide_env_diff = true;
@@ -11,18 +14,17 @@
   programs.eza.enable = true;
 
   programs.git.enable = true;
-  programs.git.difftastic.enable = true;
-  programs.git.extraConfig = {
+  programs.git.settings = {
     init.defaultBranch = "main";
     pull.rebase = true;
+    user.email = lib.mkDefault "jan.justin.vtonder@gmail.com";
+    user.name = "Jan-Justin van Tonder";
   };
   programs.git.signing = {
     format = "ssh";
     signByDefault = true;
     signer = "${pkgs._1password-gui}/bin/op-ssh-sign";
   };
-  programs.git.userEmail = lib.mkDefault "jan.justin.vtonder@gmail.com";
-  programs.git.userName = "Jan-Justin van Tonder";
 
   programs.helix.enable = true;
   programs.helix.package = pkgs.helix_git.overrideAttrs (prev:

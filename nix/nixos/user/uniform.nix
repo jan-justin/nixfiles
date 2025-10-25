@@ -39,7 +39,7 @@
 
     programs.firefox.profiles.default.settings."browser.ml.chat.provider" = "https://gemini.google.com";
 
-    programs.git.extraConfig.user.signingKey =
+    programs.git.settings.user.signingKey =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBRTP702lUz73eZnq5TZXdkb2AkNvJbNuHLBXt42kv66";
 
     programs.jujutsu.settings.signing.key =

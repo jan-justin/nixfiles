@@ -2,7 +2,6 @@
 { pkgs, ... }@_nixosModuleArgs: {
   environment.systemPackages = with pkgs; [
     devenv
-    difftastic
     fd
     just
     jq
