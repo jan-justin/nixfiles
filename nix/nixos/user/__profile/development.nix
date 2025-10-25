@@ -27,31 +27,7 @@
   };
 
   programs.helix.enable = true;
-  programs.helix.package = pkgs.helix_git.overrideAttrs (prev:
-    let
-      rectifiedGrammarLinks = lib.attrsets.mapAttrsToList
-        (lang: drv: "ln -s ${drv}/parser $out/lib/runtime/grammars/${lang}.so")
-        prev.passthru.grammars;
-    in
-    {
-      src = pkgs.fetchFromGitHub {
-        owner = "helix-editor";
-        repo = "helix";
-        rev = "282345c4b80716ac3d98baf114b153969738b1da";
-        sha256 = "sha256-mHvZ8eBuOAUt/JFfhJkBG51+qxEmp2dCnmsKwKVAEbk=";
-      };
-
-      postInstall = prev.postInstall + ''
-        # Kanagawa gutter tweak
-        substituteInPlace $out/lib/runtime/themes/kanagawa.toml --replace \
-          '"ui.gutter" = { fg = "sumiInk6", bg = "sumiInk4" }' \
-          '"ui.gutter" = { fg = "sumiInk6", bg = "sumiInk3" }'
-
-        # Grammar fix
-        rm $out/lib/runtime/grammars 
-        mkdir -p $out/lib/runtime/grammars
-      '' + (builtins.concatStringsSep "\n" rectifiedGrammarLinks);
-    });
+  programs.helix.package = pkgs.helix_git;
   programs.helix.defaultEditor = true;
   programs.helix.languages.language = [
     {
@@ -91,9 +67,19 @@
       "c" = ":toggle inline-diagnostics-cursor-line hint disable";
       "e" = ":toggle end-of-line-diagnostics hint disable";
     };
-    theme = "kanagawa";
+    theme = "kanagawa-tweaked";
   };
-  programs.helix.themes = { empty = { }; };
+  programs.helix.themes =
+    let
+      kanagawaTOML = builtins.readFile "${pkgs.helix_git}/lib/runtime/themes/kanagawa.toml";
+      kanagawa = builtins.fromTOML kanagawaTOML;
+    in
+    {
+      empty = { };
+      kanagawa-tweaked = kanagawa // {
+        "ui.gutter".bg = "sumiInk3";
+      };
+    };
 
   programs.jujutsu.enable = true;
   programs.jujutsu.package = pkgs.jujutsu_git;
