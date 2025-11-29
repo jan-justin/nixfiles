@@ -3,6 +3,7 @@
 
   inputs = {
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    chaotic.inputs.nixpkgs.follows = "nixpkgs";
 
     devenv.url = "github:cachix/devenv";
 
@@ -20,11 +21,13 @@
     nonstd.inputs.std.follows = "std";
 
     nur.url = "github:nix-community/nur";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
 
     std.url = "github:divnix/std";
     std.inputs.nixpkgs.follows = "nixpkgs";
 
     stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { nixpkgs, nonstd, self, std, ... }@inputs:
